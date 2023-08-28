@@ -75,6 +75,16 @@ void consumer() {
 }
 
 int main() {
-	
+	numThreads = 2;
+
+	// Create threads
+	std::thread consumer_thread(consumer);
+	std::thread producer_thread1(producer, 20);
+	std::thread producer_thread2(producer, 33);
+
+	producer_thread1.join();
+	producer_thread2.join();
+	consumer_thread.join();
+
 	return 0;
 }
