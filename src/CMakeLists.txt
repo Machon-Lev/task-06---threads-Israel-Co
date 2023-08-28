@@ -1,1 +1,1 @@
-﻿target_sources (PriorityQueue PRIVATE "main.cpp")
+﻿target_sources (task8_Israel_Cohen PRIVATE "main.cpp")

@@ -1,9 +1,25 @@
-﻿# CMakeList.txt : Top-level CMake project file, do global configuration
-# and include sub-projects here.
-#
-cmake_minimum_required (VERSION 3.8)
+﻿cmake_minimum_required (VERSION 3.15)
 
-project ("task8_Israel_Cohen")
+project (task8_Israel_Cohen)
 
-# Include sub-projects.
-add_subdirectory ("task8_Israel_Cohen")
+# New CMake versions map C++20 to /std:c++20 instead of c++latest, so <format>
+# and other unstable ABI features aren't supported. Use C++23 for such versions
+if (MSVC AND CMAKE_VERSION VERSION_GREATER_EQUAL 3.21)
+    set(CMAKE_CXX_STANDARD 23)
+else ()
+    set(CMAKE_CXX_STANDARD 20)
+endif ()
+
+set (CMAKE_CXX_STANDARD_REQUIRED ON)
+set (CMAKE_CXX_EXTENSIONS OFF)
+
+if (MSVC)
+    add_compile_options (/W4 /permissive- /Zc:externConstexpr /Zc:inline)
+endif ()
+
+add_executable (task8_Israel_Cohen "")
+
+add_subdirectory (src)
+
+
+
